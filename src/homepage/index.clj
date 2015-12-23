@@ -119,6 +119,29 @@
             {:image "/img/footer/white-pinterest.png"
              :link ""}]}])
 
+(def top-nav
+  [{:text "Calculator"
+    :link ""
+    }
+   {:text "AppBuilder"
+    :link ""
+    }
+   {:text "AppBoard"
+    :link ""
+    }
+   {:text "Pricing"
+    :link ""
+    }
+   {:text "Blog"
+    :link ""
+    }
+   {:text "Resources"
+    :link ""
+    }
+   {:text "About Us"
+    :link ""
+    }])
+
 (defn render [{global-meta :meta posts :entries}]
   (html5
     {:lang "en"}
@@ -134,70 +157,81 @@
      (include-css "/css/site.css")]
 
     [:body
-     [:div#intro
-      [:div.container.column.centered
-       [:h1 (s/upper-case (:header intro))]
-       [:iframe.embed-video {:width "460" :height "215" :frameborder "0"
-                             :src "https://www.youtube.com/embed/ajPA6AhUilI"
-                             :allowfullscreen true}]
-       [:h2 (:sub-header intro)]]]
+     [:div#top-nav
+      [:img.item {:src "/img/exicon-logo.png"}]
+      [:div.item
+       (for [item top-nav]
+         [:a {:href (:link item)}
+          (:text item)])]
+      [:div.item
+       [:a.button "Sign Up"]
+       [:a "Login"]]]
 
-     [:div#overview
-      [:div.container.row
-       (for [item (:fe overview)]
-         [:div.item (:header item)
-          [:br]
-          [:a {:href (:href item)}
-           "Find out more.."]])]
-      [:div.container.row.centered
-       [:h2 (:header overview)]]
-      [:div.container.row
-       (for [item (:le overview)]
-         [:div.item
-          [:h3.centered (:header item)]
-          [:div (:text item)]
-          [:a {:href (:href item)}
-           "Find out more.."]])]]
+     [:div.main
+      [:div#intro
+       [:div.container.column.centered
+        [:h1 (s/upper-case (:header intro))]
+        [:iframe.embed-video {:width "460" :height "215" :frameborder "0"
+                              :src "https://www.youtube.com/embed/ajPA6AhUilI"
+                              :allowfullscreen true}]
+        [:h2 (:sub-header intro)]]]
 
-     [:div#testimonials
-      [:div.container.row
-       (for [item testimonials]
-         [:div.item.segment
-          [:img {:src (:photo item)}]
-          [:img.right-img {:src (:logo item)}]
-          [:div [:b (:name item)]]
-          [:div (:title item)]
-          [:p (:testimonial item)]
-          ])]]
+      [:div#overview
+       [:div.container.row
+        (for [item (:fe overview)]
+          [:div.item (:header item)
+           [:br]
+           [:a {:href (:href item)}
+            "Find out more.."]])]
+       [:div.container.row.centered
+        [:h2 (:header overview)]]
+       [:div.container.row
+        (for [item (:le overview)]
+          [:div.item
+           [:h3.centered (:header item)]
+           [:div (:text item)]
+           [:a {:href (:href item)}
+            "Find out more.."]])]]
 
-     [:div#appboard
-      [:div.container.column.centered
-       [:div
-        [:h2 (:header appboard)]
-        [:h3 (:text appboard)]]
-       [:img.image.bordered {:src (:img appboard)}]
-       [:a.button {:href (:cta appboard)}
-        "Get started now"]]]
+      [:div#testimonials
+       [:div.container.row
+        (for [item testimonials]
+          [:div.item.segment
+           [:img {:src (:photo item)}]
+           [:img.right-img {:src (:logo item)}]
+           [:div [:b (:name item)]]
+           [:div (:title item)]
+           [:p (:testimonial item)]
+           ])]]
 
-     [:div.container.divider]
+      [:div#appboard
+       [:div.container.column.centered
+        [:div
+         [:h2 (:header appboard)]
+         [:h3 (:text appboard)]]
+        [:img.image.bordered {:src (:img appboard)}]
+        [:a.button {:href (:cta appboard)}
+         "Get started now"]]]
 
-     [:div#customers
-      [:div.container.column.centered
-       [:h2 (:header customers)]
-       [:img.image {:src (:img customers)}]]]
+      [:div.container.divider]
 
-     [:div#footer
-      [:div.container.row
-       (for [elem footer]
-         [:div.item
-          [:div [:b (:header elem)]]
-          (for [item (:items elem)]
-            (if (:image item)
-              [:a {:href (:link item)}
-               [:img {:src (:image item)}]]
-              [:div
+      [:div#customers
+       [:div.container.column.centered
+        [:h2 (:header customers)]
+        [:img.image {:src (:img customers)}]]]
+
+      [:div#footer
+       [:div.container.row
+        (for [elem footer]
+          [:div.item
+           [:div [:b (:header elem)]]
+           (for [item (:items elem)]
+             (if (:image item)
                [:a {:href (:link item)}
-                (:text item)]]))])]]
+                [:img {:src (:image item)}]]
+               [:div
+                [:a {:href (:link item)}
+                 (:text item)]]))])]]]
 
      ]))
 

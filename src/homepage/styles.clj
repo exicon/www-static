@@ -11,10 +11,11 @@
                           [:#intro {:background-size (percent 100)
                                     :min-height (vmax 30)
                                     :font-size (vmax 1.5)}]
-                          [:.item {:flex-grow 1
-                                   :flex-basis 0}]]
+                          [:.container
+                           [:.item {:flex-grow 1
+                                    :flex-basis 0}]]]
    {:min-width (px 480)
-    :max-width (px 720)} []
+    :max-width (px 720)} [[:#top-nav [:a {:font-size (vw 1.5)}]]]
 
    {:max-width (px 480)} []})
 
@@ -43,8 +44,24 @@
 
 ; (def row {:flex-flow "row wrap"})
 ; (def column {:flex-flow "column wrap"})
-
+(def top-space (px 68))
 (defstyles base
+  [:#top-nav
+   {:position "fixed"
+    :background "white"
+    :width (percent 100)
+    :height top-space
+    :display "flex"
+    :align-items "center"
+    :justify-content "space-around"}
+   [:a {:margin "0 1em"
+        :color "black"
+        :font-size (em 0.8)}]
+   [:img {:width (px 110)}]
+   [:.item {:flex-shrink 1}]]
+
+  [:.main
+   {:padding-top top-space}]
   [:body
    {:margin "0"
     :font-family "Helvetica-Neue, Helvetica, sans-serif"
@@ -99,7 +116,8 @@
     :max-width (px 900)}]
   [:.button
    {:background teal
-    :color "white"
+    :color "white !important"
+    :cursor "pointer"
     :padding "0.7em 1em"
     :border-radius (em 0.3)
     :font-size (em 1.1)}
