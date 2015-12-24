@@ -27,23 +27,6 @@
                :align-items "center"
                :text-align "center"})
 
-; (def segment
-;   { :background #FFF;
-;     :padding (em 1)
-;     :border-radius (em .28571429)
-;     :border "1px solid rgba(34,36,38,.15)"
-;    })
-
-; (def container
-;   {:display
-;     #{"-webkit-box""-moz-box""-ms-flexbox"
-;       "-webkit-flex""flex"}
-;     :justify-content "space-between"
-;     :padding (em 0.5)
-;     :margin "0 auto"})
-
-; (def row {:flex-flow "row wrap"})
-; (def column {:flex-flow "column wrap"})
 (def top-space (px 68))
 (defstyles base
   [:#top-nav
@@ -53,7 +36,8 @@
     :height top-space
     :display "flex"
     :align-items "center"
-    :justify-content "space-around"}
+    :justify-content "space-around"
+    :box-shadow "0 1px 2px 0 rgba(34,36,38,.15)"}
    [:a {:margin "0 1em"
         :color "black"
         :font-size (em 0.8)}]
@@ -76,11 +60,10 @@
     #{"-webkit-box""-moz-box""-ms-flexbox"
       "-webkit-flex""flex"}
     :justify-content "space-between"
-    :padding (em 0.5)
-    :margin "0 auto"}
+    :margin "1em auto"}
    [:.item
     {:padding (em 1)
-     :margin (em 0.5)
+     :margin "1em 0.5em"
      :flex-grow 1}]]
   [:.column
    {:flex-flow "column wrap"}]
@@ -92,6 +75,7 @@
    {:justify-content "center"
     :align-items "center"
     :text-align "center"}]
+
   [:#intro {:display "flex"
             :background
             "url('/img/landing-page/header.jpg') center no-repeat"
@@ -101,6 +85,7 @@
     {:width (vmax 7)
      :height (px 111)
      :min-width (px 200)}]]
+
   [:.right-img
    {:vertical-align "top"
     :float "right"}]
@@ -109,6 +94,7 @@
     :padding (em 1)
     :border-radius (em 0.3)
     :border "1px solid rgba(34,36,38,.15)"}]
+
   [:#testimonials
    {:background grey}]
   [:img.image
@@ -123,17 +109,17 @@
     :font-size (em 1.1)}
    [:.bordered
     {:border-radius (em 0.3)
-     :border "1px solid rgba(34,36,38,.15)"}]]
+     :border "solid 1px rgba(34,36,38,.15)"}]]
+
   [:#footer
    {:background dark-grey
     :color "white"}
-   [:a {:color "white"}]]
+   [:a {:color "white"}]
+   [:.container
+    {:margin-bottom 0}]]
   [:.divider
-   {:border-top "1px solid rgba(34,36,38,.15)"
-    :border-bottom "1px solid rgba(255,255,255,.1)"}]
+   {:border-top "1px dotted rgba(34,36,38,.15)"
+    :border-bottom "1px dotted rgba(255,255,255,.1)"}]
 
-  (map (fn [[query rule]] (at-media query rule)) mediaqueries)
-
-  )
-
+  (map (fn [[query rule]] (at-media query rule)) mediaqueries))
 

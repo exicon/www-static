@@ -11,24 +11,24 @@
 
 (def overview
   {:fe [{:header "Taking your organization mobile?"
-         :href "https://www.exiconglobal.com/appboard"}
+         :link "https://www.exiconglobal.com/appboard"}
         {:header "Want more impact from your apps?"
-         :href "https://www.exiconglobal.com/appboard"}
+         :link "https://www.exiconglobal.com/appboard"}
         {:header "Not sure what to build? Or who should build it?"
-         :href "https://www.exiconglobal.com/appbuilder"}]
+         :link "https://www.exiconglobal.com/appbuilder"}]
    :header "The AppBoard"
    :le [{:header "Less Hassle"
          :text "Secure, dashboard with tools, analytics +
                resources for your team"
-               :href "https://www.exiconglobal.com/appbuilder"}
+               :link "https://www.exiconglobal.com/appboard"}
         {:header "More Power"
          :text "Business intelligence to make smarter
                decisions and improved ROI"
-               :href "https://www.exiconglobal.com/appbuilder"}
+               :link "https://www.exiconglobal.com/appboard"}
         {:header "Better Apps"
          :text "Be guided through defining an app + get matched with
                3 great development companies"
-               :href "https://www.exiconglobal.com/appbuilder"}]})
+               :link "https://www.exiconglobal.com/appbuilder"}]})
 
 
 (def testimonials
@@ -105,41 +105,41 @@
              :link "https://www.exiconglobal.com/terms-of-use/"}]}
    {:header "Follow Us"
     :items [{:image "/img/footer/white-g.png"
-             :link ""}
+             :link "https://plus.google.com/115123733707845359729/posts"}
             {:image "/img/footer/white-fb.png"
-             :link ""}
+             :link "https://www.facebook.com/exicon.mobi"}
             {:image "/img/footer/white-twitter.png"
-             :link ""}
+             :link "https://twitter.com/exicon"}
             {:image "/img/footer/white-linkedin.png"
-             :link ""}
+             :link "http://www.linkedin.com/company/exicon-ltd-"}
             {:image "/img/footer/white-youtube.png"
-             :link ""}
+             :link "https://www.youtube.com/user/Exicon1"}
             {:image "/img/footer/white-weibo.png"
-             :link ""}
+             :link "http://www.weibo.com/u/3147916252"}
             {:image "/img/footer/white-pinterest.png"
-             :link ""}]}])
+             :link "http://www.pinterest.com/exicon/pins/follow/?guid=CqzN7JCYsQQy-0"}]}])
 
 (def top-nav
   [{:text "Calculator"
-    :link ""
+    :link "https://www.exiconglobal.com/app-idea/#calculate"
     }
    {:text "AppBuilder"
-    :link ""
+    :link "https://www.exiconglobal.com/appbuilder/"
     }
    {:text "AppBoard"
-    :link ""
+    :link "https://www.exiconglobal.com/appboard/"
     }
    {:text "Pricing"
-    :link ""
+    :link "https://www.exiconglobal.com/pricing/"
     }
    {:text "Blog"
-    :link ""
+    :link "http://blog.exiconglobal.com/"
     }
    {:text "Resources"
-    :link ""
+    :link "https://www.exiconglobal.com/reports/"
     }
    {:text "About Us"
-    :link ""
+    :link "https://www.exiconglobal.com/about-us/"
     }])
 
 (defn render [{global-meta :meta posts :entries}]
@@ -149,11 +149,18 @@
      [:meta {:charset "utf-8"}]
      [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
      [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
-     [:meta {:itemprop "author" :name "author" :content "Exicon (laura@exiconglobal.com)"}]
-     [:meta {:name "keywords" :itemprop "keywords" :content "exicon, apps"}]
-     [:meta {:name "description" :itemprop "description" :content "Exicon - mobile app management platform"}]
-     [:title "Exicon ..."]
-     [:link {:rel "shortcut icon" :href "/favicon.ico"}]
+     [:meta {:itemprop "author" :name "author" :content "Exicon (admin@exiconglobal.com)"}]
+     [:meta {:name "keywords" :itemprop "keywords"
+             :content "Manage Apps, Exicon, App Management, Mobile Relationship Management,
+                      What Is Mobile Relationship Management, MRM, AppBoard,
+                      Find The Right Developer, Mobile App Strategy, Do I Need Mobile
+                      Analytics, Best Tool for Mobile App Analytics, Digital
+                      Asset Management"}]
+     [:meta {:name "description" :itemprop "description"
+             :content "Exicon AppBoard Is An App Management Platform That Helps
+                      SMEs & Enterprises Build, Manage & Promote Their Mobile Apps."}]
+     [:title "Manage Your Apps | Exicon | Mobile Relationship Management | AppBoard"]
+     [:link {:rel "shortcut icon" :href "/img/favicon.ico"}]
      (include-css "/css/site.css")]
 
     [:body
@@ -164,8 +171,8 @@
          [:a {:href (:link item)}
           (:text item)])]
       [:div.item
-       [:a.button "Sign Up"]
-       [:a "Login"]]]
+       [:a.button {:href "https://www.exiconglobal.com/pricing/"} "Sign Up"]
+       [:a {:href "https://app.exiconglobal.com/"} "Login"]]]
 
      [:div.main
       [:div#intro
@@ -181,8 +188,9 @@
         (for [item (:fe overview)]
           [:div.item (:header item)
            [:br]
-           [:a {:href (:href item)}
+           [:a {:href (:link item)}
             "Find out more.."]])]
+       [:div.container.divider]
        [:div.container.row.centered
         [:h2 (:header overview)]]
        [:div.container.row
@@ -190,7 +198,7 @@
           [:div.item
            [:h3.centered (:header item)]
            [:div (:text item)]
-           [:a {:href (:href item)}
+           [:a {:href (:link item)}
             "Find out more.."]])]]
 
       [:div#testimonials
@@ -209,16 +217,19 @@
         [:div
          [:h2 (:header appboard)]
          [:h3 (:text appboard)]]
-        [:img.image.bordered {:src (:img appboard)}]
-        [:a.button {:href (:cta appboard)}
-         "Get started now"]]]
+        [:div.container.centered
+         [:img.image {:src (:img appboard)}]]
+        [:div.container.centered
+         [:a.button {:href (:cta appboard)}
+          "Get started now"]]]]
 
       [:div.container.divider]
 
       [:div#customers
        [:div.container.column.centered
         [:h2 (:header customers)]
-        [:img.image {:src (:img customers)}]]]
+        [:div.container.centered
+         [:img.image {:src (:img customers)}]]]]
 
       [:div#footer
        [:div.container.row
@@ -227,11 +238,10 @@
            [:div [:b (:header elem)]]
            (for [item (:items elem)]
              (if (:image item)
-               [:a {:href (:link item)}
+               [:a {:href (:link item)
+                    :target "_blank"}
                 [:img {:src (:image item)}]]
                [:div
                 [:a {:href (:link item)}
-                 (:text item)]]))])]]]
-
-     ]))
+                 (:text item)]]))])]]] ]))
 
