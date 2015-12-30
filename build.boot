@@ -5,26 +5,28 @@
   :dependencies
   '[[hiccup "1.0.5"]
     [perun "0.2.2-SNAPSHOT"]
-    [hashobject/boot-s3 "0.1.2-SNAPSHOT"]
+    ; [hashobject/boot-s3 "0.1.2-SNAPSHOT"]
     [pandeiro/boot-http "0.7.0"]
     [org.martinklepsch/boot-gzip "0.1.2"]
-    [org.martinklepsch/boot-garden "1.2.5-8"]])
+    [org.martinklepsch/boot-garden "1.2.5-8"]
+    ])
 
 (require '[io.perun :refer :all]
          '[pandeiro.boot-http :refer [serve]]
-         '[hashobject.boot-s3 :refer :all]
+         ; '[hashobject.boot-s3 :refer :all]
          '[org.martinklepsch.boot-gzip :refer [gzip]]
          '[org.martinklepsch.boot-garden :refer :all])
 
 (task-options!
   pom {:project 'www.exiconglobal.com
        :version "0.1.0"}
-  s3-sync {
-           :bucket "www.exiconglobal.com"
-           :access-key (System/getenv "AWS_ACCESS_KEY")
-           :secret-key (System/getenv "AWS_SECRET_KEY")
-           :source "public"
-           :options {"Cache-Control" "max-age=315360000, no-transform, public"}})
+  ; s3-sync {
+  ;          :bucket "www.exiconglobal.com"
+  ;          :access-key (System/getenv "AWS_ACCESS_KEY")
+  ;          :secret-key (System/getenv "AWS_SECRET_KEY")
+  ;          :source "public"
+  ;          :options {"Cache-Control" "max-age=315360000, no-transform, public"}}
+  )
 
 (deftask build-dev
   "Build blog dev version"
@@ -43,6 +45,7 @@
   (comp (build-dev)
         (gzip :regex [#".html$" #".css$" #".js$"])
         ; (s3-sync)
+        ; (sync-bucket)
         ))
 
 (deftask dev

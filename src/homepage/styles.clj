@@ -5,19 +5,10 @@
     [garden.color :as color :refer [rgb as-hex]]
     [garden.stylesheet :refer [at-media]]))
 
-(def mediaqueries
-  {{:min-width (px 720)} [[:body {:font-size (px 18)}]
-                          [:.container {:width (percent 80)}]
-                          [:#intro {:background-size (percent 100)
-                                    :min-height (vmax 30)
-                                    :font-size (vmax 1.5)}]
-                          [:.container
-                           [:.item {:flex-grow 1
-                                    :flex-basis 0}]]]
-   {:min-width (px 480)
-    :max-width (px 720)} [[:#top-nav [:a {:font-size (vw 1.5)}]]]
-
-   {:max-width (px 480)} []})
+(def big-screen {:min-width (px 720)})
+(def medium-screen {:min-width (px 480)
+                    :max-width (px 720)})
+(def small-screen {:max-width (px 480)})
 
 (def teal (rgb [89 210 217]))
 (def grey (as-hex "#eee"))
@@ -28,6 +19,7 @@
                :text-align "center"})
 
 (def top-space (px 68))
+
 (defstyles base
   [:#top-nav
    {:position "fixed"
@@ -121,5 +113,16 @@
    {:border-top "1px dotted rgba(34,36,38,.15)"
     :border-bottom "1px dotted rgba(255,255,255,.1)"}]
 
-  (map (fn [[query rule]] (at-media query rule)) mediaqueries))
+  (at-media big-screen [[:body {:font-size (px 18)}]
+                        [:.container {:width (percent 80)}]
+                        [:#intro {:background-size (percent 100)
+                                  :min-height (vmax 30)
+                                  :font-size (vmax 1.5)}]
+                        [:.container
+                         [:.item {:flex-grow 1
+                                  :flex-basis 0}]]])
+  (at-media medium-screen [[:#top-nav [:a {:font-size (vw 1.5)}]]])
+  (at-media small-screen [])
+
+  )
 
