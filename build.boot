@@ -1,4 +1,3 @@
-
 (set-env!
   :source-paths #{"src"}
   :resource-paths #{"resources"}
@@ -15,10 +14,11 @@
          '[pandeiro.boot-http :refer [serve]]
          ; '[hashobject.boot-s3 :refer :all]
          '[org.martinklepsch.boot-gzip :refer [gzip]]
-         '[org.martinklepsch.boot-garden :refer :all])
+         '[org.martinklepsch.boot-garden :refer :all]
+         )
 
 (task-options!
-  pom {:project 'www.exiconglobal.com
+  pom {:project 'www-static
        :version "0.1.0"}
   ; s3-sync {
   ;          :bucket "www.exiconglobal.com"
@@ -51,7 +51,7 @@
 (deftask dev
   []
   (comp
+    (serve :resource-root "public" :port 3103)
     (watch)
     (build-dev)
-    (serve :resource-root "public" :port 3103)
     ))

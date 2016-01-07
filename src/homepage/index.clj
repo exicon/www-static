@@ -3,7 +3,9 @@
     [hiccup.core :only (html)]
     [hiccup.page :only (html5 include-css include-js)])
   (:require
-    [clojure.string :as s]))
+    [clojure.string :as s]
+    [homepage.integrations :refer
+     [google-analytics hubspot-analytics]]))
 
 (def intro
   {:header  "The complexity of mobile made easy"
@@ -18,17 +20,17 @@
          :link "https://www.exiconglobal.com/appbuilder"}]
    :header "The AppBoard"
    :le [{:header "Less Hassle"
+         :link "https://www.exiconglobal.com/appboard"
          :text "Secure, dashboard with tools, analytics +
-               resources for your team"
-               :link "https://www.exiconglobal.com/appboard"}
+               resources for your team"}
         {:header "More Power"
+         :link "https://www.exiconglobal.com/appboard"
          :text "Business intelligence to make smarter
-               decisions and improved ROI"
-               :link "https://www.exiconglobal.com/appboard"}
+               decisions and improved ROI"}
         {:header "Better Apps"
+         :link "https://www.exiconglobal.com/appbuilder"
          :text "Be guided through defining an app + get matched with
-               3 great development companies"
-               :link "https://www.exiconglobal.com/appbuilder"}]})
+               3 great development companies"}]})
 
 
 (def testimonials
@@ -50,15 +52,14 @@
    {:photo "/img/testimonials/christopher-david.png"
     :logo "/img/testimonials/schneider-electric.png"
     :name "Christopher David"
-    :title "CTO Digital Customer Experience & SVP Software,
-           Schneider Electric"
-           :testimonial "Managing developers was crucial to our business.
-                        Exicon helped us build the foundation on which to
-                        drive our new products, bringing new developers
-                        into our prefered developer programs in over
-                        20 countries which helped us generate a whole
-                        suite of local applications for the different
-                        markets."}
+    :title "CTO Digital Customer Experience & SVP Software, Schneider Electric"
+    :testimonial "Managing developers was crucial to our business.
+                 Exicon helped us build the foundation on which to
+                 drive our new products, bringing new developers
+                 into our prefered developer programs in over
+                 20 countries which helped us generate a whole
+                 suite of local applications for the different
+                 markets."}
 
    {:photo "/img/testimonials/aran-dadswell.png"
     :logo "/img/testimonials/get-to-know-your-brain.png"
@@ -70,10 +71,10 @@
 
 (def appboard
   {:header "Command Center for your app(s)"
+   :img "/img/landing-page/app-store-analytics.png"
+   :cta ""
    :text "Business intelligence and tools to help your team take
-         action on your app(s) portfolio"
-         :img "/img/landing-page/app-store-analytics.png"
-         :cta ""})
+         action on your app(s) portfolio"})
 
 (def customers
   {:header "Our Customer portfolio speaks for itself"
@@ -121,26 +122,19 @@
 
 (def top-nav
   [{:text "Calculator"
-    :link "https://www.exiconglobal.com/app-idea/#calculate"
-    }
+    :link "https://www.exiconglobal.com/app-idea/#calculate"}
    {:text "AppBuilder"
-    :link "https://www.exiconglobal.com/appbuilder/"
-    }
+    :link "https://www.exiconglobal.com/appbuilder/"}
    {:text "AppBoard"
-    :link "https://www.exiconglobal.com/appboard/"
-    }
+    :link "https://www.exiconglobal.com/appboard/"}
    {:text "Pricing"
-    :link "https://www.exiconglobal.com/pricing/"
-    }
+    :link "https://www.exiconglobal.com/pricing/"}
    {:text "Blog"
-    :link "http://blog.exiconglobal.com/"
-    }
+    :link "http://blog.exiconglobal.com/"}
    {:text "Resources"
-    :link "https://www.exiconglobal.com/reports/"
-    }
+    :link "https://www.exiconglobal.com/reports/"}
    {:text "About Us"
-    :link "https://www.exiconglobal.com/about-us/"
-    }])
+    :link "https://www.exiconglobal.com/about-us/"}])
 
 (defn render [{global-meta :meta posts :entries}]
   (html5
@@ -161,7 +155,9 @@
                       SMEs & Enterprises Build, Manage & Promote Their Mobile Apps."}]
      [:title "Manage Your Apps | Exicon | Mobile Relationship Management | AppBoard"]
      [:link {:rel "shortcut icon" :href "/img/favicon.ico"}]
-     (include-css "/css/site.css")]
+     (include-css "/css/site.css")
+     (google-analytics)
+     (hubspot-analytics)]
 
     [:body
      [:div#top-nav
