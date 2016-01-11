@@ -71,7 +71,7 @@
                  getting close now!"}])
 
 (def appboard
-  {:header "Command Center for your app(s)"
+  {:header "The AppBoard, Command Center for your app(s)"
    :text   "Business intelligence and tools to help your team take
          action on your app(s) portfolio"
    :img    "/img/landing-page/app-store-analytics.png"
@@ -153,99 +153,94 @@
          [:meta {:name    "description" :itemprop "description"
                  :content "Exicon AppBoard Is An App Management Platform That Helps
                       SMEs & Enterprises Build, Manage & Promote Their Mobile Apps."}]
-                 [:title "Manage Your Apps | Exicon | Mobile Relationship Management | AppBoard"]
-                 [:link {:rel "shortcut icon" :href "/img/favicon.ico"}]
-                 (include-css "/css/site.css")
-                 (google-analytics)
-                 (hubspot-analytics)]
+         [:title "Manage Your Apps | Exicon | Mobile Relationship Management | AppBoard"]
+         [:link {:rel "shortcut icon" :href "/img/favicon.ico"}]
+         (include-css "/css/site.css")
+         (google-analytics)
+         (hubspot-analytics)]
 
-           [:body
-            [:div#top-nav
-             [:img.item {:src "/img/exicon-logo.png"}]
+        [:body
+         [:div#top-nav
+          [:img.item {:src "/img/exicon-logo.png"}]
+          [:div.item
+           (for [item top-nav]
+                [:a {:href (:link item)}
+                 (:text item)])]
+          [:div.item
+           [:a.button {:href "https://www.exiconglobal.com/pricing/"} "Sign Up"]
+           [:a {:href "https://app.exiconglobal.com/"} "Login"]]]
+
+         [:div.main
+          [:div#intro
+           [:div.container.column.centered
+            [:div
+             [:h1 (s/upper-case (:header intro))]
+             [:h2 (:sub-header intro)]]
+            [:iframe.embed-video {:width           "460" :height "215" :frameborder "0"
+                                  :src             "https://www.youtube.com/embed/ajPA6AhUilI"
+                                  :allowfullscreen true}]]]
+
+          [:section#overview
+           [:div.container.centered.row
+            (for [item (:fe overview)]
+                 [:h3.item (:header item)
+                  [:br]
+                  [:a {:href (:link item)}
+                   "Find out more.."]])]]
+
+          [:div.container.divider]
+
+          [:section#appboard
+           [:div.container.column.centered
+            [:div.header
+             [:h2 (:header appboard)]
+             [:h3 (:text appboard)]]]
+           [:div.container.vert-centered.row
+            [:div.basis-item
+             [:img.image.centered {:src (:img appboard)}]]
+            [:div.basis-item
+             [:div.container.row
+              (for [item (:le overview)]
+                   [:div.appboard-item
+                    [:b [:h3 (:header item)]]
+                    [:div (:text item)]
+                    [:a {:href (:link item)}
+                     "Find out more.."]])]]]
+           [:div.container.centered
+            [:div.item
+             [:a.button {:href (:cta appboard)}
+              "Get started now"]]]]
+
+          [:section#testimonials
+           [:div.container.row
+            (for [item testimonials]
+                 [:div.item.segment
+                  [:img {:src (:photo item)}]
+                  [:img.right-img {:src (:logo item)}]
+                  [:div [:b (:name item)]]
+                  [:div (:title item)]
+                  [:p
+                   [:i (:testimonial item)]]
+                  ])]]
+
+          [:section#customers
+           [:div.container.column.centered
+            [:h2 (:header customers)]
+            [:div.container.centered
              [:div.item
-              (for [item top-nav]
-                   [:a {:href (:link item)}
-                    (:text item)])]
-             [:div.item
-              [:a.button {:href "https://www.exiconglobal.com/pricing/"} "Sign Up"]
-              [:a {:href "https://app.exiconglobal.com/"} "Login"]]]
+              [:img.image {:src (:img customers)}]]]]]
 
-            [:div.main
-             [:div#intro
-              [:div.container.column.centered
-               [:div
-                [:h1 (s/upper-case (:header intro))]
-                [:h2 (:sub-header intro)]]
-               [:iframe.embed-video {:width           "460" :height "215" :frameborder "0"
-                                     :src             "https://www.youtube.com/embed/ajPA6AhUilI"
-                                     :allowfullscreen true}]]]
-
-             [:section#overview
-              [:div.container.centered.row
-               (for [item (:fe overview)]
-                    [:div.item (:header item)
-                     [:br]
-                     [:a {:href (:link item)}
-                      "Find out more.."]])]]
-
-             [:div.container.divider]
-
-             [:section#appboard
-              [:div.container.column.centered
-               [:div
-                [:h2 (:header appboard)]
-                [:h3 (:text appboard)]]
-               [:div.container.centered
-                [:div.item
-                 [:img.image {:src (:img appboard)}]]]
-               [:div.container.centered
-                [:div.item
-                 [:a.button {:href (:cta appboard)}
-                  "Get started now"]]]]]
-
-             [:div.container.divider]
-
-             [:section
-              [:div.container.row.centered
-               [:h2 (:header overview)]]
-              [:div.container.row
-               (for [item (:le overview)]
-                    [:div.item
-                     [:h2.centered (:header item)]
-                     [:div (:text item)]
-                     [:a {:href (:link item)}
-                      "Find out more.."]])]]
-
-             [:section#testimonials
-              [:div.container.row
-               (for [item testimonials]
-                    [:div.item.segment
-                     [:img {:src (:photo item)}]
-                     [:img.right-img {:src (:logo item)}]
-                     [:div [:b (:name item)]]
-                     [:div (:title item)]
-                     [:p
-                      [:i (:testimonial item)]]
-                     ])]]
-
-             [:section#customers
-              [:div.container.column.centered
-               [:h2 (:header customers)]
-               [:div.container.centered
-                [:div.item
-                 [:img.image {:src (:img customers)}]]]]]
-
-             [:div#footer
-              [:div.container.row
-               (for [elem footer]
-                    [:div.item
-                     [:div [:b (:header elem)]]
-                     (for [item (:items elem)]
-                          (if (:image item)
-                            [:a {:href   (:link item)
-                                 :target "_blank"}
-                             [:img {:src (:image item)}]]
-                            [:div
-                             [:a {:href (:link item)}
-                              (:text item)]]))])]]]]))
+          [:div#footer
+           [:div.container.row
+            (for [elem footer]
+                 [:div.item
+                  [:div [:b (:header elem)]]
+                  (for [item (:items elem)]
+                       (if (:image item)
+                         [:a {:href   (:link item)
+                              :target "_blank"}
+                          [:img {:src (:image item)}]]
+                         [:div
+                          [:a {:href (:link item)}
+                           (:text item)]]))])]]]]))
 
