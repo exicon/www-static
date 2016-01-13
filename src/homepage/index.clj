@@ -5,21 +5,24 @@
     (:require
       [clojure.string :as s]
       [homepage.integrations :refer
-       [google-analytics hubspot-analytics]]))
+       [google-analytics hubspot-analytics]]
+      [config :refer [config]]))
 
+(def www-url (config :www-url))
+(def node-appboard-url (config :node-appboard-url))
 (def intro
   {:header     "The complexity of mobile made easy"
    :sub-header "Mobile Workflow Management"})
 
 (def overview
-  {:fe     [{:header    "Not sure what to build?"
+  {:fe     [{:header     "Not sure what to build?"
              :sub-header "Or who should build it?"
-             :link      "https: //www.exiconglobal.com/appbuilder"
-             :link-text "Go to App Builder"}
+             :link       (str www-url "/appbuilder")
+             :link-text  "Go to App Builder"}
             {:header "Is your organisation performing as well as you would like in mobile?"
-             :link   "https://www.exiconglobal.com/appboard"}
+             :link   (str www-url "/appboard")}
             {:header "Want your apps to have more impact?"
-             :link   "https://www.exiconglobal.com/appboard"}]
+             :link   (str www-url "/appboard")}]
    :header "The AppBoard"
 
    :le     [{:header "Less Hassle"
@@ -70,12 +73,12 @@
                  getting close now!"}])
 
 (def appboard
-  {:header "AppBoard"
+  {:header     "AppBoard"
    :sub-header "The Command Center for your app(s)"
-   :text   "Business intelligence and tools to help your team take
+   :text       "Business intelligence and tools to help your team take
          action on your app portfolio"
-   :img    "/img/landing-page/app-store-analytics.png"
-   :cta    "https://www.exiconglobal.com/pricing/"})
+   :img        "/img/landing-page/app-store-analytics.png"
+   :cta        (str www-url "/pricing/")})
 (def customers
   {:header "Our Customer portfolio speaks for itself"
    :img    "/img/landing-page/customers.png"})
@@ -83,27 +86,27 @@
 (def footer
   [{:header "Company"
     :items  [{:text "About Us"
-              :link "https://www.exiconglobal.com/about-us/"}
+              :link (str www-url "/about-us/")}
              {:text "Customers"
-              :link "https://www.exiconglobal.com/customers/"}
+              :link (str www-url "/customers/")}
              {:text "Media & Press"
-              :link "https://www.exiconglobal.com/news/"}
+              :link (str www-url "/news/")}
              ]}
    {:header "Products"
     :items  [{:text "ApiAxle"
               :link "http://apiaxle.com/"}
              {:text "AppBuilder"
-              :link "https://www.exiconglobal.com/appbuilder/"}
+              :link (str www-url "/appbuilder/")}
              {:text "AppBoard"
-              :link "https://www.exiconglobal.com/appboard/"}
+              :link (str www-url "/appboard/")}
              ]}
    {:header "Developers"
-    :link   "https://www.exiconglobal.com/developers/"}
+    :link   (str www-url "/developers/")}
    {:header "Legal"
     :items  [{:text "Privacy"
-              :link "https://www.exiconglobal.com/privacy-policy/"}
+              :link (str www-url "/privacy-policy/")}
              {:text "Terms & Conditions"
-              :link "https://www.exiconglobal.com/terms-of-use/"}]}
+              :link (str www-url"/terms-of-use/")}]}
    {:header "Follow Us"
     :items  [{:image "/img/footer/white-g.png"
               :link  "https://plus.google.com/115123733707845359729/posts"}
@@ -122,19 +125,19 @@
 
 (def top-nav
   [{:text "Calculator"
-    :link "https://www.exiconglobal.com/app-idea/#calculate"}
+    :link (str www-url "/app-idea/#calculate")}
    {:text "AppBuilder"
-    :link "https://www.exiconglobal.com/appbuilder/"}
+    :link (str www-url "/appbuilder/")}
    {:text "AppBoard"
-    :link "https://www.exiconglobal.com/appboard/"}
+    :link (str www-url "/appboard/")}
    {:text "Pricing"
-    :link "https://www.exiconglobal.com/pricing/"}
+    :link (str www-url "/pricing/")}
    {:text "Blog"
     :link "http://blog.exiconglobal.com/"}
    {:text "Resources"
-    :link "https://www.exiconglobal.com/reports/"}
+    :link (str www-url "/reports/")}
    {:text "About Us"
-    :link "https://www.exiconglobal.com/about-us/"}])
+    :link (str www-url "/about-us/")}])
 
 (defn render [{global-meta :meta posts :entries}]
       (html5
@@ -167,8 +170,8 @@
                 [:a {:href (:link item)}
                  (:text item)])]
           [:div.item
-           [:a.top-nav-button {:href "https://www.exiconglobal.com/pricing/"} "Sign Up"]
-           [:a {:href "https://app.exiconglobal.com/"} "Login"]]]
+           [:a.top-nav-button {:href (str www-url "/pricing/")} "Sign Up"]
+           [:a {:href node-appboard-url} "Login"]]]
 
          [:div.main
           [:div#intro
@@ -217,12 +220,11 @@
                     [:div (:text item)]])]
              [:div.container.row
               [:div.item
-               [:a.button {:href (:cta appboard)}
+               [:a.button {:href (str www-url "/appboard")}
                 "Find out more"]]
               [:div.item
                [:a.button {:href (:cta appboard)}
-                "Get started now"]]
-              ]]]]
+                "Get started now"]]]]]]
 
           [:section#testimonials
            [:div.container.row

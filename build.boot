@@ -51,7 +51,7 @@
 (deftask dev
   []
   (comp
-    (serve :resource-root "public" :port 3103)
+    (serve :resource-root "public" :port 3105)
     (watch)
     (build-dev)
     ))
