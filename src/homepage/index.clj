@@ -12,26 +12,25 @@
    :sub-header "Mobile Workflow Management"})
 
 (def overview
-  {:fe     [{:header "Not sure what to build? Or who should build it?"
-             :link   "https://www.exiconglobal.com/appbuilder"}
-            {:header "Taking your organization mobile?"
+  {:fe     [{:header    "Not sure what to build?"
+             :sub-header "Or who should build it?"
+             :link      "https: //www.exiconglobal.com/appbuilder"
+             :link-text "Go to App Builder"}
+            {:header "Is your organisation performing as well as you would like in mobile?"
              :link   "https://www.exiconglobal.com/appboard"}
-            {:header "Want more impact from your apps?"
+            {:header "Want your apps to have more impact?"
              :link   "https://www.exiconglobal.com/appboard"}]
    :header "The AppBoard"
 
    :le     [{:header "Less Hassle"
-             :text   "Secure, dashboard with tools, analytics +
-               resources for your team"
-             :link   "https://www.exiconglobal.com/appboard"}
+             :text   "Secure dashboard with tools, analytics +
+               resources for your team"}
             {:header "More Power"
              :text   "Business intelligence to make smarter
-               decisions and improved ROI"
-             :link   "https://www.exiconglobal.com/appboard"}
+               decisions and improve your ROI"}
             {:header "Better Apps"
              :text   "Be guided through defining an app + get matched with
-               3 great development companies"
-             :link   "https://www.exiconglobal.com/appbuilder"}]})
+               3 great development companies"}]})
 
 (def testimonials
   [{:photo       "/img/testimonials/richard-sofer.png"
@@ -71,9 +70,10 @@
                  getting close now!"}])
 
 (def appboard
-  {:header "The AppBoard, Command Center for your app(s)"
+  {:header "AppBoard"
+   :sub-header "The Command Center for your app(s)"
    :text   "Business intelligence and tools to help your team take
-         action on your app(s) portfolio"
+         action on your app portfolio"
    :img    "/img/landing-page/app-store-analytics.png"
    :cta    "https://www.exiconglobal.com/pricing/"})
 (def customers
@@ -167,7 +167,7 @@
                 [:a {:href (:link item)}
                  (:text item)])]
           [:div.item
-           [:a.button {:href "https://www.exiconglobal.com/pricing/"} "Sign Up"]
+           [:a.top-nav-button {:href "https://www.exiconglobal.com/pricing/"} "Sign Up"]
            [:a {:href "https://app.exiconglobal.com/"} "Login"]]]
 
          [:div.main
@@ -184,32 +184,45 @@
            [:div.container.centered.row
             (for [item (:fe overview)]
                  [:h3.item (:header item)
+                  (when (:sub-header item)
+                        [:span
+                         [:br]
+                         (:sub-header item)])
                   [:br]
                   [:a {:href (:link item)}
-                   "Find out more.."]])]]
+                   (if (:link-text item)
+                     (:link-text item)
+                     "Find out more..")]])]]
 
           [:div.container.divider]
 
           [:section#appboard
            [:div.container.column.centered
             [:div.header
-             [:h2 (:header appboard)]
+             [:h2 (:header appboard)
+              [:br]
+              (:sub-header appboard)]
              [:h3 (:text appboard)]]]
-           [:div.container.vert-centered.row
-            [:div.basis-item
-             [:img.image.centered {:src (:img appboard)}]]
+           [:div.container.row
+            [:div.basis-item.screenshot
+             [:div.container.column
+              [:div
+               [:img.image.centered {:src (:img appboard)}]]
+              ]]
             [:div.basis-item
              [:div.container.row
               (for [item (:le overview)]
                    [:div.appboard-item
                     [:b [:h3 (:header item)]]
-                    [:div (:text item)]
-                    [:a {:href (:link item)}
-                     "Find out more.."]])]]]
-           [:div.container.centered
-            [:div.item
-             [:a.button {:href (:cta appboard)}
-              "Get started now"]]]]
+                    [:div (:text item)]])]
+             [:div.container.row
+              [:div.item
+               [:a.button {:href (:cta appboard)}
+                "Find out more"]]
+              [:div.item
+               [:a.button {:href (:cta appboard)}
+                "Get started now"]]
+              ]]]]
 
           [:section#testimonials
            [:div.container.row

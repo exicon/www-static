@@ -24,7 +24,7 @@
 
 (defstyles base
            [:section
-            {:margin  "1em auto"}]
+            {:margin "1em auto"}]
            [:#top-nav
             {:position        "fixed"
              :background      "white"
@@ -51,7 +51,9 @@
            [:#overview [:h3 {:font-weight "400"}]]
            [:#appboard
             [:.header [:h2 {:font-weight "800"}]
-             [:h3 {:font-weight "400"}]]]
+             [:h3 {:font-weight "400"}]]
+            [:.button {:max-width (px 200)
+                       :margin    "0 auto"}]]
            [:a {:text-decoration "none"
                 :color           teal
                 :font-size       (em 0.8)}]
@@ -65,7 +67,7 @@
             [:.basis-item
              {:margin     "1em 0.5em"
               :flex-basis 1
-              :flex-grow 1}]]
+              :flex-grow  1}]]
            [:.column
             {:flex-flow "column wrap"}]
            [:.row
@@ -87,7 +89,8 @@
             [:.embed-video
              {:width     (vmax 7)
               :height    (px 111)
-              :min-width (px 200)}]]
+              :min-width (px 200)}]
+            [:h1 :h2 {:color "white"}]]
 
            [:.right-img
             {:vertical-align "top"
@@ -99,8 +102,8 @@
              :border        "1px solid rgba(34,36,38,.15)"}]
 
            [:#testimonials
-            {:background grey
-             :font-size (em 0.8)
+            {:background  grey
+             :font-size   (em 0.8)
              :line-height (em 1.4)}]
            [:img.image
             {:width     (vw 90)
@@ -109,20 +112,29 @@
            [:#appboard
             [:.image {:width      (percent 100)
                       :box-shadow "0px 2px 2px 0px rgba(34, 36, 38, 0.25)"}]]
+           [:.top-nav-button
+            {:background    teal
+             :color         "white !important"
+             :cursor        "pointer"
+             :padding       "0.7em 1em"
+             :border-radius (em 0.3)
+             :font-size     (em 1.1)}]
            [:.button
             {:background    teal
              :color         "white !important"
              :cursor        "pointer"
              :padding       "0.7em 1em"
              :border-radius (em 0.3)
-             :font-size     (em 1.1)}
-            [:.bordered
-             {:border-radius (em 0.3)
-              :border        "solid 1px rgba(34,36,38,.15)"}]]
+             :font-size     (em 1)
+             :display       "block"
+             :text-align    "center"}]
+           [:.bordered
+            {:border-radius (em 0.3)
+             :border        "solid 1px rgba(34,36,38,.15)"}]
 
            [:#footer
-            {:background dark-grey
-             :color      "white"
+            {:background     dark-grey
+             :color          "white"
              :padding-bottom (em 2)}
             [:a {:color "white"}]
             [:.container
@@ -130,6 +142,9 @@
            [:.divider
             {:border-top    "1px dotted rgba(34,36,38,.15)"
              :border-bottom "1px dotted rgba(255,255,255,.1)"}]
+           [:.container.row.item
+            {:width  (percent 100)
+             :margin "0em auto 1em auto"}]
 
            (at-media large-screen [[:body {:font-size (px 19)}]
                                    [:.container {:width (percent 80)}]
@@ -144,16 +159,18 @@
                                    [:.basis-item {:flex-basis 0
                                                   :flex-grow  1}]
                                    [:#intro [:.embed-video
-                                             {:width     (px 400)
-                                              :height    (px 224)}]]])
+                                             {:width  (px 400)
+                                              :height (px 224)}]]
+                                   [:#appboard
+                                    [:.button {:margin "0 0.5em 0 -0.5em"}]]])
 
            (at-media big-screen [[:body {:font-size (px 16)}]
-                                   [:#intro {:background-size (percent 100)
-                                             :min-height      (vmax 30)
-                                             :font-size       (vmax 1.5)}]
-                                   [:.container
-                                    [:.item {:flex-grow  1
-                                             :flex-basis 0}]]
+                                 [:#intro {:background-size (percent 100)
+                                           :min-height      (vmax 30)
+                                           :font-size       (vmax 1.5)}]
+                                 [:.container
+                                  [:.item {:flex-grow  1
+                                           :flex-basis 0}]]
                                  [:.appboard-item
                                   {:flex-basis 0
                                    :flex-grow  1

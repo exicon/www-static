@@ -1,12 +1,15 @@
 # validate template
-aws cloudformation validate-template --template-body file:///Users/pair/exicon/www-static/cf-designer.template
+
+$ aws cloudformation validate-template --template-body file:///Users/pair/exicon/www-static/cf-designer.template
 
 # create a new stack
+
 aws cloudformation create-stack --stack-name 'stg-www-static' --template-body file:///Users/pair/exicon/www-static/cf-designer.template
 
 # update existing stack
+
 aws cloudformation update-stack --stack-name 'stg-www-static' --template-body file:///Users/pair/exicon/www-static/cf-designer.template
 
 # sync files - takes few minutes
-boot build
-aws s3 sync --exclude "*.DS_Store" target/public/ s3://stg.app-hq.com/
+
+boot build ; aws s3 sync --exclude "*.DS_Store" target/public/ s3://stg.app-hq.com/
