@@ -1,9 +1,10 @@
 (ns config
     (:require
-      [clojure.edn :as edn]))
+      [camel-snake-kebab.core :refer [->SCREAMING_SNAKE_CASE_STRING]]))
 
-(defmacro config
-          [& keys]
-          (let [env-cfg-file (str "./config.edn")
-                config-opts (edn/read-string (slurp env-cfg-file))]
-               (get-in config-opts keys)))
+(def lookup
+  {:www-url           "http://localhost:3103"
+   :node-appboard-url "http://localhost:3000"})
+
+(defmacro config [key] (or (System/getenv (->SCREAMING_SNAKE_CASE_STRING key))
+                           (get lookup key)))

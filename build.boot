@@ -8,6 +8,7 @@
     [pandeiro/boot-http "0.7.0"]
     [org.martinklepsch/boot-gzip "0.1.2"]
     [org.martinklepsch/boot-garden "1.2.5-8"]
+    [camel-snake-kebab "0.3.2"]
     ])
 
 (require '[io.perun :refer :all]
