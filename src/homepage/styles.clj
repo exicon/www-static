@@ -79,7 +79,8 @@
              :align-items     "center"
              :text-align      "center"}]
            [:.vert-centered {:align-items "center"}]
-           [:.hor-centered {:justify-content "center"}]
+           [:.hor-centered {:justify-content "center"
+                            :text-align      "center"}]
 
            [:#intro {:display               "flex"
                      :background            "url('/img/landing-page/header.jpg') center no-repeat"

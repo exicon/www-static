@@ -185,7 +185,7 @@
                                   :allowfullscreen true}]]]
 
           [:section#overview
-           [:div.container.centered.row
+           [:div.container.hor-centered.row
             (for [item (:fe overview)]
                  [:h3.item (:header item)
                   (when (:sub-header item)
