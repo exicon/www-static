@@ -1,4 +1,6 @@
-(ns homepage.integrations)
+(ns homepage.integrations
+  (:require
+    [config :refer [config]]))
 
 (defn hubspot-analytics []
   [:script {:type "text/javascript"}
@@ -21,3 +23,17 @@
      ga('require', 'displayfeatures');
      ga('send', 'pageview');
      ga('require', 'displayfeatures');"])
+
+(defn inspectlet []
+  [:script {:type "text/javascript"}
+   :id "inspectletjs"
+   (str
+     "window.__insp = window.__insp || [];
+     __insp.push(['wid', "
+     (config :inspectlet-wid)
+     "]);
+     (function() {
+     function ldinsp(){var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = \"inspsync\"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+     document.readyState != \"complete\" ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
+     })();")])
+

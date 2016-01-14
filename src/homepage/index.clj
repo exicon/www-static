@@ -5,7 +5,7 @@
     (:require
       [clojure.string :as s]
       [homepage.integrations :refer
-       [google-analytics hubspot-analytics]]
+       [google-analytics hubspot-analytics inspectlet]]
       [config :refer [config]]))
 
 (def www-url (config :www-url))
@@ -160,7 +160,8 @@
          [:link {:rel "shortcut icon" :href "/img/favicon.ico"}]
          (include-css "/css/site.css")
          (google-analytics)
-         (hubspot-analytics)]
+         (hubspot-analytics)
+         (inspectlet)]
 
         [:body
          [:div#top-nav

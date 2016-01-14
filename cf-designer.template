@@ -200,7 +200,7 @@
     }
   },
   "Resources": {
-    "StgAppHqCf": {
+    "StgExicon": {
       "Type": "AWS::CloudFront::Distribution",
       "Properties": {
         "DistributionConfig": {
@@ -220,12 +220,12 @@
                 "HTTPSPort": 443
               },
               "Id": {
-                "Ref": "StgAppHqBucket"
+                "Ref": "StgExiconBucket"
               },
               "DomainName": {
                 "Fn::Join": [ "",
                   [
-                    {"Ref": "StgAppHqBucket"},
+                    {"Ref": "StgExiconBucket"},
                     ".s3-website-",
                     {"Ref": "AWS::Region"},
                     ".amazonaws.com"
@@ -235,10 +235,10 @@
               }
             }
           ],
-          "Aliases": ["www.stg.app-hq.com", "stg.app-hq.com"],
+          "Aliases": ["www.stg.exicon.mobi", "stg.exicon.mobi"],
           "DefaultCacheBehavior": {
             "TargetOriginId": {
-              "Ref": "StgAppHqBucket"
+              "Ref": "StgExiconBucket"
             },
             "ViewerProtocolPolicy": "allow-all",
             "ForwardedValues": {
@@ -246,8 +246,9 @@
             }
           },
           "ViewerCertificate": {
-            "CloudFrontDefaultCertificate": true,
-            "MinimumProtocolVersion": "SSLv3"
+            "IamCertificateId": "ASCAJKLXXJAAJJFJSU34I",
+            "SslSupportMethod": "sni-only",
+            "MinimumProtocolVersion": "TLSv1"
           }
         }
       },
@@ -257,20 +258,20 @@
         }
       },
       "DependsOn": [
-        "StgAppHqBucket",
+        "StgExiconBucket",
         "LogsBucket"
       ]
     },
-    "WwwStgAppHqDNS": {
+    "WwwStgExiconDNS": {
       "Type": "AWS::Route53::RecordSet",
       "Properties": {
-        "HostedZoneName": "app-hq.com.",
-        "Name": "www.stg.app-hq.com.",
+        "HostedZoneName": "exicon.mobi.",
+        "Name": "www.stg.exicon.mobi.",
         "Type": "A",
         "AliasTarget": {
           "HostedZoneId": "Z2FDTNDATAQYW2",
           "DNSName": {
-            "Fn::GetAtt": ["StgAppHqCf", "DomainName"]
+            "Fn::GetAtt": ["StgExicon", "DomainName"]
           },
           "EvaluateTargetHealth": false
         }
@@ -281,19 +282,19 @@
         }
       },
       "DependsOn": [
-        "StgAppHqCf"
+        "StgExicon"
       ]
     },
-    "StgAppHqDNS": {
+    "StgExiconDNS": {
       "Type": "AWS::Route53::RecordSet",
       "Properties": {
-        "HostedZoneName": "app-hq.com.",
-        "Name": "stg.app-hq.com.",
+        "HostedZoneName": "exicon.mobi.",
+        "Name": "stg.exicon.mobi.",
         "Type": "A",
         "AliasTarget": {
           "HostedZoneId": "Z2FDTNDATAQYW2",
           "DNSName": {
-            "Fn::GetAtt": ["StgAppHqCf", "DomainName"]
+            "Fn::GetAtt": ["StgExicon", "DomainName"]
           },
           "EvaluateTargetHealth": false
         }
@@ -304,14 +305,14 @@
         }
       },
       "DependsOn": [
-        "StgAppHqCf"
+        "StgExicon"
       ]
     },
-    "StgAppHqPolicy": {
+    "StgExiconPolicy": {
       "Type": "AWS::S3::BucketPolicy",
       "Properties": {
         "Bucket": {
-          "Ref": "StgAppHqBucket"
+          "Ref": "StgExiconBucket"
         },
         "PolicyDocument": {
           "Version": "2012-10-17",
@@ -327,7 +328,7 @@
                   [
                     "arn:aws:s3:::",
                     {
-                      "Ref": "StgAppHqBucket"
+                      "Ref": "StgExiconBucket"
                     },
                     "/*"
                   ]
@@ -343,10 +344,10 @@
         }
       }
     },
-    "StgAppHqBucket": {
+    "StgExiconBucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "BucketName": "stg.app-hq.com",
+        "BucketName": "stg.exicon.mobi",
         "WebsiteConfiguration": {
           "IndexDocument": "index.html"
         },
@@ -370,7 +371,7 @@
       "Type": "AWS::S3::Bucket",
       "Properties": {
         "AccessControl": "LogDeliveryWrite",
-        "BucketName": "logs.stg.app-hq.com"
+        "BucketName": "logs.stg.exicon.mobi"
       },
       "Metadata": {
         "AWS::CloudFormation::Designer": {
