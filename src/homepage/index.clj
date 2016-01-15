@@ -192,7 +192,7 @@
          [:input.mobile-nav {:type "checkbox" :id "nav-trigger" :class "nav-trigger"}]
          [:label.mobile-nav {:for "nav-trigger"}]
          [:img.mobile-logo {:src "/img/exicon-logo.png"}]
-
+         [:div.mobile-top-bar]
 
          [:div.main.site-wrap
           [:div#intro
