@@ -29,6 +29,7 @@ body {
     left: 0;
     z-index: 0;
     color: white;
+    overflow-y: scroll;
 }
 
 .site-wrap {
@@ -62,7 +63,7 @@ body {
     right: 1em;
     top: 12px;
     display: "none";
-    width: 135px;
+    width: 120px;
 }
 
 label[for="nav-trigger"] {
