@@ -6,10 +6,10 @@
       [garden.stylesheet :refer [at-media]]))
 
 (def large-screen {:min-width (px 1200)})
-(def big-screen {:min-width (px 720)
+(def big-screen {:min-width (px 800)
                  :max-width (px 1200)})
 (def medium-screen {:min-width (px 480)
-                    :max-width (px 720)})
+                    :max-width (px 800)})
 (def small-screen {:max-width (px 480)})
 
 (def teal (rgb [89 210 217]))
@@ -33,15 +33,15 @@
              :display         "flex"
              :align-items     "center"
              :justify-content "space-around"
-             :box-shadow      "0 1px 2px 0 rgba(34,36,38,.15)"}
+             :box-shadow      "0 1px 2px 0 rgba(34,36,38,.15)"
+             :z-index         10}
             [:a {:margin    "0 1em"
                  :color     "black"
                  :font-size (em 0.8)}]
             [:img {:width (px 110)}]
             [:.item {:flex-shrink 1}]]
-
-           [:.main
-            {:padding-top top-space}]
+           [:#mobile-nav :.mobile-nav
+            {:display "none"}]
            [:body
             {:margin      "0"
              :font-family "Helvetica-Neue, Helvetica, sans-serif"
@@ -176,13 +176,20 @@
                                   {:flex-basis 0
                                    :flex-grow  1
                                    :margin     "0em 0.5em"}]])
-           (at-media medium-screen [[:#top-nav [:a {:font-size (vw 1.5)}]]
+           (at-media medium-screen [[:#mobile-nav :.mobile-nav
+                                     {:display "block"}]
+                                    [:#top-nav {:display "none"}]
+                                    [:#top-nav [:a {:font-size (vw 1.5)}]]
                                     [:.appboard-item
                                      {:flex-basis 1
                                       :flex-grow  1
-                                      :margin     "0em 0.5em"}]])
-           (at-media small-screen [[:.appboard-item
+                                      :margin     "0em 0.5em"}]
+                                    [:.mobile-logo {:display "block"}]])
+           (at-media small-screen [[:.mobile-logo {:display "block"}]
+                                   [:#mobile-nav :.mobile-nav
+                                    {:display "block"}]
+                                   [:#top-nav {:display "none"}]
+                                   [:.appboard-item
                                     {:flex-basis 1
                                      :flex-grow  1
                                      :margin     "0em 0.5em"}]]))
-

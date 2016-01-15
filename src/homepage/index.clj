@@ -139,6 +139,10 @@
    {:text "About Us"
     :link (str www-url "/about-us/")}])
 
+(defn hide-menu []
+  [:script {:type "text/javascript"}
+   "function closeMenu(){\n  document.getElementById('nav-trigger').checked = false;\n}"])
+
 (defn render [{global-meta :meta posts :entries}]
       (html5
         {:lang "en"}
@@ -159,11 +163,22 @@
          [:title "Manage Your Apps | Exicon | Mobile Relationship Management | AppBoard"]
          [:link {:rel "shortcut icon" :href "/img/favicon.ico"}]
          (include-css "/css/site.css")
+         (include-css "/css/mobile-nav.css")
          (google-analytics)
          (hubspot-analytics)
-         (inspectlet)]
+         (inspectlet)
+         (hide-menu)]
 
-        [:body
+        [:body {:onresize "closeMenu()"}
+
+         [:ul#mobile-nav.navigation
+          [:li [:a {:href (str www-url "/pricing/")} "Sign Up"]]
+          [:li [:a {:href node-appboard-url} "Login"]]
+          (for [item top-nav]
+            [:li {:onclick "closeMenu()" :class "nav-item"}
+             [:a {:href (:link item)}
+              (:text item)]])]
+
          [:div#top-nav
           [:img.item {:src "/img/exicon-logo.png"}]
           [:div.item
@@ -174,7 +189,12 @@
            [:a.top-nav-button {:href (str www-url "/pricing/")} "Sign Up"]
            [:a {:href node-appboard-url} "Login"]]]
 
-         [:div.main
+         [:input.mobile-nav {:type "checkbox" :id "nav-trigger" :class "nav-trigger"}]
+         [:label.mobile-nav {:for "nav-trigger"}]
+         [:img.mobile-logo {:src "/img/exicon-logo.png"}]
+
+
+         [:div.main.site-wrap
           [:div#intro
            [:div.container.column.centered
             [:div
