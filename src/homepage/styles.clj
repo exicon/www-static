@@ -53,7 +53,9 @@
             [:.header [:h2 {:font-weight "800"}]
              [:h3 {:font-weight "400"}]]
             [:.button {:max-width (px 200)
-                       :margin    "0 auto"}]]
+                       :margin    "0 auto"}]
+            [:.image {:width      (percent 100)
+                      :box-shadow "0px 2px 2px 0px rgba(34, 36, 38, 0.25)"}]]
            [:a {:text-decoration "none"
                 :color           teal
                 :font-size       (em 0.8)}]
@@ -62,7 +64,7 @@
              :justify-content "space-between"
              :margin          "0 auto"}
             [:.item
-             {:margin    "1em 0.5em"
+             {:margin    "1em"
               :flex-grow 1}]
             [:.basis-item
              {:margin     "1em 0.5em"
@@ -90,7 +92,8 @@
             [:.embed-video
              {:width     (vmax 7)
               :height    (px 111)
-              :min-width (px 200)}]
+              :min-width (px 310)
+              :min-height (px 174)}]
             [:h1 :h2 {:color "white"}]]
 
            [:.right-img
@@ -108,11 +111,7 @@
              :line-height (em 1.4)}]
            [:img.image
             {:width     (vw 90)
-             :max-width (px 900)
-             }]
-           [:#appboard
-            [:.image {:width      (percent 100)
-                      :box-shadow "0px 2px 2px 0px rgba(34, 36, 38, 0.25)"}]]
+             :max-width (px 900)}]
            [:.top-nav-button
             {:background    teal
              :color         "white !important"
@@ -126,7 +125,7 @@
              :cursor        "pointer"
              :padding       "0.7em 1em"
              :border-radius (em 0.3)
-             :font-size     (em 1)
+             :font-size     (em 0.85)
              :display       "block"
              :text-align    "center"}]
            [:.bordered
@@ -148,22 +147,29 @@
              :margin "0em auto 1em auto"}]
 
            (at-media large-screen [[:body {:font-size (px 19)}]
+                                   [:#overview
+                                    [:.item {:margin "0.5em 2.2em"}]]
                                    [:.container {:width (percent 80)}]
                                    [:#intro {:background-size (percent 100)
                                              :min-height      (vmax 30)
-                                             :font-size       (vmax 1.5)}]
+                                             :font-size       (vmax 1.5)}
+                                    [:.embed-video
+                                     {:width  (px 450)
+                                      :height (px 253)}]]
                                    [:.container
                                     [:.item {:flex-grow  1
                                              :flex-basis 0}]]
 
-                                   [:.appboard-item {:flex-basis 1}]
+                                   [:.appboard-item {:flex-basis 1
+                                                     :margin "0 0.5em"}]
                                    [:.basis-item {:flex-basis 0
                                                   :flex-grow  1}]
-                                   [:#intro [:.embed-video
-                                             {:width  (px 400)
-                                              :height (px 224)}]]
                                    [:#appboard
-                                    [:.button {:margin "0 0.5em 0 -0.5em"}]]])
+                                    [:.button {:margin "0 0.5em 0 -0.5em"}]
+                                    [:.overview.row {:text-align      "left"
+                                                     :justify-content "left"}]
+                                    ["div.cta.row .item:first-child" "div.cta.row .item:last-child" {:display "none"}]]
+                                   ])
 
            (at-media big-screen [[:body {:font-size (px 16)}]
                                  [:#intro {:background-size (percent 100)
@@ -175,7 +181,10 @@
                                  [:.appboard-item
                                   {:flex-basis 0
                                    :flex-grow  1
-                                   :margin     "0em 0.5em"}]])
+                                   :margin     "0em 1em"}]
+                                 [:#appboard
+                                  [:.overview.row {:text-align "center"
+                                                              :justify-content "center"}]]])
            (at-media medium-screen [[:#mobile-nav :.mobile-nav
                                      {:display "block"}]
                                     [:#top-nav {:display "none"}]
@@ -183,8 +192,11 @@
                                     [:.appboard-item
                                      {:flex-basis 1
                                       :flex-grow  1
-                                      :margin     "0em 0.5em"}]
-                                    [:.mobile-logo {:display "block"}]])
+                                      :margin     "0em 1em"}]
+                                    [:.mobile-logo {:display "block"}]
+                                    [:#appboard
+                                     [:.overview.row {:text-align "center"
+                                                      :justify-content "center"}]]])
            (at-media small-screen [[:.mobile-logo {:display "block"}]
                                    [:#mobile-nav :.mobile-nav
                                     {:display "block"}]
@@ -192,4 +204,7 @@
                                    [:.appboard-item
                                     {:flex-basis 1
                                      :flex-grow  1
-                                     :margin     "0em 0.5em"}]]))
+                                     :margin     "0em 1em"}]
+                                   [:#appboard
+                                    [:.overview.row {:text-align "center"
+                                                     :justify-content "center"}]]]))

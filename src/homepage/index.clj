@@ -80,7 +80,7 @@
    :img        "/img/landing-page/app-store-analytics.png"
    :cta        (str www-url "/pricing/")})
 (def customers
-  {:header "Our Customer portfolio speaks for itself"
+  {:header "Our customer portfolio speaks for itself"
    :img    "/img/landing-page/customers.png"})
 
 (def footer
@@ -200,9 +200,10 @@
             [:div
              [:h1 (s/upper-case (:header intro))]
              [:h2 (:sub-header intro)]]
-            [:iframe.embed-video {:width           "460" :height "215" :frameborder "0"
-                                  :src             "https://www.youtube.com/embed/ajPA6AhUilI"
-                                  :allowfullscreen true}]]]
+            [:iframe.embed-video {:frameborder "0"
+                                  :src "https://www.youtube.com/embed/ajPA6AhUilI?loop=1&playlist=ajPA6AhUilI"
+                                  :allowfullscreen true
+                                  :fullScreen true}]]]
 
           [:section#overview
            [:div.container.hor-centered.row
@@ -227,25 +228,24 @@
               [:br]
               (:sub-header appboard)]
              [:h3 (:text appboard)]]]
-           [:div.container.row
-            [:div.basis-item.screenshot
-             [:div.container.column
-              [:div
-               [:img.image.centered {:src (:img appboard)}]]
-              ]]
+           [:div.container.vert-centered.row
+            [:div.basis-item.centered.screenshot
+             [:img.image {:src (:img appboard)}]]
             [:div.basis-item
-             [:div.container.row
+             [:div.container.overview.row
               (for [item (:le overview)]
                    [:div.appboard-item
                     [:b [:h3 (:header item)]]
                     [:div (:text item)]])]
-             [:div.container.row
+             [:div.container.row.cta
+              [:div.item]
               [:div.item
                [:a.button {:href (str www-url "/appboard")}
                 "Find out more"]]
               [:div.item
                [:a.button {:href (:cta appboard)}
-                "Get started now"]]]]]]
+                "Get started now"]]
+              [:div.item]]]]]
 
           [:section#testimonials
            [:div.container.row
