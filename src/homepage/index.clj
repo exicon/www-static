@@ -118,8 +118,6 @@
               :link  "http://www.linkedin.com/company/exicon-ltd-"}
              {:image "/img/footer/white-youtube.png"
               :link  "https://www.youtube.com/user/Exicon1"}
-             {:image "/img/footer/white-weibo.png"
-              :link  "http://www.weibo.com/u/3147916252"}
              {:image "/img/footer/white-pinterest.png"
               :link  "http://www.pinterest.com/exicon/pins/follow/?guid=CqzN7JCYsQQy-0"}]}])
 
