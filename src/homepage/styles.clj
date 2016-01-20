@@ -54,8 +54,7 @@
              [:h3 {:font-weight "400"}]]
             [:.button {:max-width (px 200)
                        :margin    "0 auto"}]
-            [:.image {:width      (percent 100)
-                      :box-shadow "0px 2px 2px 0px rgba(34, 36, 38, 0.25)"}]]
+            [:.image {:width      (percent 100)}]]
            [:a {:text-decoration "none"
                 :color           teal
                 :font-size       (em 0.8)}]
