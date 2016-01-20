@@ -77,7 +77,7 @@
    :sub-header "The Command Center for your app(s)"
    :text       "Business intelligence and tools to help your team take
          action on your app portfolio"
-   :img        "/img/landing-page/app-store-analytics.png"
+   :img       "http://cdn2.hubspot.net/hubfs/511335/website/appboard/magnifying-appboard.png"
    :cta        (str www-url "/pricing/")})
 (def customers
   {:header "Our customer portfolio speaks for itself"
