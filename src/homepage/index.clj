@@ -1,15 +1,20 @@
 (ns homepage.index
-    (:use
-      [hiccup.core :only (html)]
-      [hiccup.page :only (html5 include-css include-js)])
-    (:require
-      [clojure.string :as s]
-      [homepage.integrations :refer
-       [google-analytics hubspot-analytics inspectlet]]
-      [config :refer [config]]))
+  (:use
+    [hiccup.core :only (html)]
+    [hiccup.page :only (html5 include-css include-js)])
+  (:require
+    [clojure.string :as s]
+    [homepage.integrations :refer
+     [google-analytics hubspot-analytics inspectlet]]
+    [config :refer [config]]))
 
 (def www-url (config :www-url))
 (def node-appboard-url (config :node-appboard-url))
+(def registration-url
+  (str "https://app.exiconglobal.com/"
+       "?package=free&"
+       "returnUri=https://appboard.exiconglobal.com#!/registration/"))
+
 (def intro
   {:header     "The complexity of mobile made easy"
    :sub-header "Mobile Workflow Management"})
@@ -77,8 +82,9 @@
    :sub-header "The Command Center for your app(s)"
    :text       "Business intelligence and tools to help your team take
          action on your app portfolio"
-   :img       "http://cdn2.hubspot.net/hubfs/511335/website/appboard/magnifying-appboard.png"
-   :cta        (str www-url "/pricing/")})
+   :img        "http://cdn2.hubspot.net/hubfs/511335/website/appboard/magnifying-appboard.png"
+   :cta        registration-url})
+
 (def customers
   {:header "Our customer portfolio speaks for itself"
    :img    "/img/landing-page/customers.png"})
@@ -106,7 +112,7 @@
     :items  [{:text "Privacy"
               :link (str www-url "/privacy-policy/")}
              {:text "Terms & Conditions"
-              :link (str www-url"/terms-of-use/")}]}
+              :link (str www-url "/terms-of-use/")}]}
    {:header "Follow Us"
     :items  [{:image "/img/footer/white-g.png"
               :link  "https://plus.google.com/115123733707845359729/posts"}
@@ -128,8 +134,6 @@
     :link (str www-url "/appbuilder/")}
    {:text "AppBoard"
     :link (str www-url "/appboard/")}
-   {:text "Pricing"
-    :link (str www-url "/pricing/")}
    {:text "Blog"
     :link "http://blog.exiconglobal.com/"}
    {:text "Resources"
@@ -142,138 +146,138 @@
    "function closeMenu(){\n  document.getElementById('nav-trigger').checked = false;\n}"])
 
 (defn render [{global-meta :meta posts :entries}]
-      (html5
-        {:lang "en"}
-        [:head
-         [:meta {:charset "utf-8"}]
-         [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
-         [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
-         [:meta {:itemprop "author" :name "author" :content "Exicon (admin@exiconglobal.com)"}]
-         [:meta {:name    "keywords" :itemprop "keywords"
-                 :content "Manage Apps, Exicon, App Management, Mobile Relationship Management,
+  (html5
+    {:lang "en"}
+    [:head
+     [:meta {:charset "utf-8"}]
+     [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
+     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
+     [:meta {:itemprop "author" :name "author" :content "Exicon (admin@exiconglobal.com)"}]
+     [:meta {:name    "keywords" :itemprop "keywords"
+             :content "Manage Apps, Exicon, App Management, Mobile Relationship Management,
                       What Is Mobile Relationship Management, MRM, AppBoard,
                       Find The Right Developer, Mobile App Strategy, Do I Need Mobile
                       Analytics, Best Tool for Mobile App Analytics, Digital
                       Asset Management"}]
-         [:meta {:name    "description" :itemprop "description"
-                 :content "Exicon AppBoard Is An App Management Platform That Helps
+     [:meta {:name    "description" :itemprop "description"
+             :content "Exicon AppBoard Is An App Management Platform That Helps
                       SMEs & Enterprises Build, Manage & Promote Their Mobile Apps."}]
-         [:title "Manage Your Apps | Exicon | Mobile Relationship Management | AppBoard"]
-         [:link {:rel "shortcut icon" :href "/img/favicon.ico"}]
-         (include-css "/css/site.css")
-         (google-analytics)
-         (hubspot-analytics)
-         (inspectlet)
-         (hide-menu)]
+     [:title "Manage Your Apps | Exicon | Mobile Relationship Management | AppBoard"]
+     [:link {:rel "shortcut icon" :href "/img/favicon.ico"}]
+     (include-css "/css/site.css")
+     (google-analytics)
+     (hubspot-analytics)
+     (inspectlet)
+     (hide-menu)]
 
-        [:body {:onresize "closeMenu()"}
+    [:body {:onresize "closeMenu()"}
 
-         [:ul#mobile-nav.navigation
-          [:li [:a {:href (str www-url "/pricing/")} "Sign Up"]]
-          [:li [:a {:href node-appboard-url} "Login"]]
-          (for [item top-nav]
-            [:li {:onclick "closeMenu()" :class "nav-item"}
-             [:a {:href (:link item)}
-              (:text item)]])]
+     [:ul#mobile-nav.navigation
+      [:li [:a {:href registration-url} "Sign Up"]]
+      [:li [:a {:href node-appboard-url} "Login"]]
+      (for [item top-nav]
+        [:li {:onclick "closeMenu()" :class "nav-item"}
+         [:a {:href (:link item)}
+          (:text item)]])]
 
-         [:div#top-nav
-          [:img.item {:src "/img/exicon-logo.png"}]
-          [:div.item
-           (for [item top-nav]
-                [:a {:href (:link item)}
-                 (:text item)])]
-          [:div.item
-           [:a.top-nav-button {:href (str www-url "/pricing/")} "Sign Up"]
-           [:a {:href node-appboard-url} "Login"]]]
+     [:div#top-nav
+      [:img.item {:src "/img/exicon-logo.png"}]
+      [:div.item
+       (for [item top-nav]
+         [:a {:href (:link item)}
+          (:text item)])]
+      [:div.item
+       [:a.top-nav-button {:href registration-url} "Sign Up"]
+       [:a {:href node-appboard-url} "Login"]]]
 
-         [:input.mobile-nav {:type "checkbox" :id "nav-trigger" :class "nav-trigger"}]
-         [:label.mobile-nav {:for "nav-trigger"}]
-         [:img.mobile-logo {:src "/img/exicon-logo.png"}]
-         [:div.mobile-top-bar]
+     [:input.mobile-nav {:type "checkbox" :id "nav-trigger" :class "nav-trigger"}]
+     [:label.mobile-nav {:for "nav-trigger"}]
+     [:img.mobile-logo {:src "/img/exicon-logo.png"}]
+     [:div.mobile-top-bar]
 
-         [:div.main.site-wrap
-          [:div#intro
-           [:div.container.column.centered
-            [:div
-             [:h1 (s/upper-case (:header intro))]
-             [:h2 (:sub-header intro)]]
-            [:iframe.embed-video {:frameborder "0"
-                                  :src "https://www.youtube.com/embed/ajPA6AhUilI?loop=1&playlist=ajPA6AhUilI"
-                                  :allowfullscreen true
-                                  :fullScreen true}]]]
+     [:div.main.site-wrap
+      [:div#intro
+       [:div.container.column.centered
+        [:div
+         [:h1 (s/upper-case (:header intro))]
+         [:h2 (:sub-header intro)]]
+        [:iframe.embed-video {:frameborder     "0"
+                              :src             "https://www.youtube.com/embed/ajPA6AhUilI?loop=1&playlist=ajPA6AhUilI"
+                              :allowfullscreen true
+                              :fullScreen      true}]]]
 
-          [:section#overview
-           [:div.container.hor-centered.row
-            (for [item (:fe overview)]
-                 [:h3.item (:header item)
-                  (when (:sub-header item)
-                        [:span
-                         [:br]
-                         (:sub-header item)])
-                  [:br]
-                  [:a {:href (:link item)}
-                   (if (:link-text item)
-                     (:link-text item)
-                     "Find out more..")]])]]
-
-          [:div.container.divider]
-
-          [:section#appboard
-           [:div.container.column.centered
-            [:div.header
-             [:h2 (:header appboard)
+      [:section#overview
+       [:div.container.hor-centered.row
+        (for [item (:fe overview)]
+          [:h3.item (:header item)
+           (when (:sub-header item)
+             [:span
               [:br]
-              (:sub-header appboard)]
-             [:h3 (:text appboard)]]]
-           [:div.container.vert-centered.row
-            [:div.basis-item.centered.screenshot
-             [:img.image {:src (:img appboard)}]]
-            [:div.basis-item
-             [:div.container.overview.row
-              (for [item (:le overview)]
-                   [:div.appboard-item
-                    [:b [:h3 (:header item)]]
-                    [:div (:text item)]])]
-             [:div.container.row.cta
-              [:div.item]
-              [:div.item
-               [:a.button {:href (str www-url "/appboard")}
-                "Find out more"]]
-              [:div.item
-               [:a.button {:href (:cta appboard)}
-                "Get started now"]]
-              [:div.item]]]]]
+              (:sub-header item)])
+           [:br]
+           [:a {:href (:link item)}
+            (if (:link-text item)
+              (:link-text item)
+              "Find out more..")]])]]
 
-          [:section#testimonials
-           [:div.container.row
-            (for [item testimonials]
-                 [:div.item.segment
-                  [:img {:src (:photo item)}]
-                  [:img.right-img {:src (:logo item)}]
-                  [:div [:b (:name item)]]
-                  [:div (:title item)]
-                  [:p
-                   [:i (:testimonial item)]]
-                  ])]]
+      [:div.container.divider]
 
-          [:section#customers
-           [:div.container.column.centered
-            [:h2 (:header customers)]
-            [:div.container.centered
-             [:div.item
-              [:img.image {:src (:img customers)}]]]]]
+      [:section#appboard
+       [:div.container.column.centered
+        [:div.header
+         [:h2 (:header appboard)
+          [:br]
+          (:sub-header appboard)]
+         [:h3 (:text appboard)]]]
+       [:div.container.vert-centered.row
+        [:div.basis-item.centered.screenshot
+         [:img.image {:src (:img appboard)}]]
+        [:div.basis-item
+         [:div.container.overview.row
+          (for [item (:le overview)]
+            [:div.appboard-item
+             [:b [:h3 (:header item)]]
+             [:div (:text item)]])]
+         [:div.container.row.cta
+          [:div.item]
+          [:div.item
+           [:a.button {:href (str www-url "/appboard")}
+            "Find out more"]]
+          [:div.item
+           [:a.button {:href (:cta appboard)}
+            "Get started now"]]
+          [:div.item]]]]]
 
-          [:div#footer
-           [:div.container.row
-            (for [elem footer]
-                 [:div.item
-                  [:div [:b (:header elem)]]
-                  (for [item (:items elem)]
-                       (if (:image item)
-                         [:a {:href   (:link item)
-                              :target "_blank"}
-                          [:img {:src (:image item)}]]
-                         [:div
-                          [:a {:href (:link item)}
-                           (:text item)]]))])]]]]))
+      [:section#testimonials
+       [:div.container.row
+        (for [item testimonials]
+          [:div.item.segment
+           [:img {:src (:photo item)}]
+           [:img.right-img {:src (:logo item)}]
+           [:div [:b (:name item)]]
+           [:div (:title item)]
+           [:p
+            [:i (:testimonial item)]]
+           ])]]
+
+      [:section#customers
+       [:div.container.column.centered
+        [:h2 (:header customers)]
+        [:div.container.centered
+         [:div.item
+          [:img.image {:src (:img customers)}]]]]]
+
+      [:div#footer
+       [:div.container.row
+        (for [elem footer]
+          [:div.item
+           [:div [:b (:header elem)]]
+           (for [item (:items elem)]
+             (if (:image item)
+               [:a {:href   (:link item)
+                    :target "_blank"}
+                [:img {:src (:image item)}]]
+               [:div
+                [:a {:href (:link item)}
+                 (:text item)]]))])]]]]))
 
