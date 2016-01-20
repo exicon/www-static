@@ -161,7 +161,6 @@
          [:title "Manage Your Apps | Exicon | Mobile Relationship Management | AppBoard"]
          [:link {:rel "shortcut icon" :href "/img/favicon.ico"}]
          (include-css "/css/site.css")
-         (include-css "/css/mobile-nav.css")
          (google-analytics)
          (hubspot-analytics)
          (inspectlet)

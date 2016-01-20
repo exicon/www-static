@@ -35,7 +35,7 @@
   (comp (global-metadata)
         (base)
         (markdown)
-        (garden :styles-var 'homepage.styles/base
+        (garden :styles-var 'homepage.styles/site
                 :output-to "public/css/site.css"
                 :pretty-print true)
         (collection :renderer 'homepage.index/render :page "index.html")))

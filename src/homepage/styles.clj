@@ -143,7 +143,79 @@
              :border-bottom "1px dotted rgba(255,255,255,.1)"}]
            [:.container.row.item
             {:width  (percent 100)
-             :margin "0em auto 1em auto"}]
+             :margin "0em auto 1em auto"}])
+
+(defstyles mobile-nav
+           [[:.navigation
+             {
+              :padding    0
+              :list-style "none"
+              :background "#111"
+              :width      (percent 100)
+              :height     (percent 100)
+              :position   "fixed"
+              :top        (px 50)
+              :right      0
+              :bottom     0
+              :left       0
+              :z-index    0
+              :color      "white"
+              :overflow-y "scroll"
+              }
+             [:li {:padding "0.5em 0"}
+              [:&:hover {:background " rgba (100, 100, 100, 0.3)"}]
+              [:a
+               {:color         "rgba(255, 255, 255, 0.5)"
+                :font-size    (em 1.1)
+                :padding-left (em 3)
+                :font-weight  800}]]]
+            [:.site-wrap
+             {:min-width        (percent 100)
+              :min-height       (percent 100)
+              :background-color "#fff"
+              :position         "relative"
+              :top              0
+              :bottom           (percent 100)
+              :left             0
+              :z-index          1
+              :padding-top      (px 68)
+              }]
+            [:.nav-trigger
+             {:position "absolute"
+              :clip     "rect (0, 0, 0, 0)"}]
+            [:.mobile-top-bar
+             {:background-color "white"
+              :position         "fixed"
+              :top              0
+              :left             0
+              :width            (percent 100)
+              :height           (px 68)
+              :z-index          3}]
+            [:.mobile-logo {:position "fixed"
+                            :z-index  4
+                            :right    (em 1)
+                            :top      (px 18)
+                            :display  "none"
+                            :width    (px 120)}]
+            ["label[for='nav-trigger']"
+             {
+              :position         "fixed"
+              :top              (px 18)
+              :left             (px 15)
+              :z-index          4
+              :width            (px 30)
+              :height           (px 30)
+              :cursor           "pointer"
+              :background-image "url('/img/mobile-nav-icon.png')"
+              :background-size  "contain"
+              }]
+            [".nav-trigger:checked ~ .site-wrap"
+             {:left (px 235)}]
+            [".nav-trigger + label, .site-wrap"
+             {:transition " left 0.2s ease"}]])
+
+
+(defstyles media-queries
 
            (at-media large-screen [[:body {:font-size (px 19)}]
                                    [:#overview
@@ -183,7 +255,7 @@
                                    :margin     "0em 1em"}]
                                  [:#appboard
                                   [:.overview.row {:text-align "center"
-                                                              :justify-content "center"}]]])
+                                                   :justify-content "center"}]]])
            (at-media medium-screen [[:#mobile-nav :.mobile-nav
                                      {:display "block"}]
                                     [:#top-nav {:display "none"}]
@@ -207,3 +279,8 @@
                                    [:#appboard
                                     [:.overview.row {:text-align "center"
                                                      :justify-content "center"}]]]))
+
+(defstyles site
+           base
+           mobile-nav
+           media-queries)
