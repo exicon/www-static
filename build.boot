@@ -45,6 +45,7 @@
   []
   (comp (build-dev)
         (gzip :regex [#".html$" #".css$" #".js$"])
+        (target)
         ; (s3-sync)
         ; (sync-bucket)
         ))
