@@ -10,10 +10,6 @@
 
 (def www-url (config :www-url))
 (def node-appboard-url (config :node-appboard-url))
-(def registration-url
-  (str "https://app.exiconglobal.com/"
-       "?package=free&"
-       "returnUri=https://appboard.exiconglobal.com#!/registration/"))
 
 (def intro
   {:header     "The complexity of mobile made easy"
@@ -83,7 +79,7 @@
    :text       "Business intelligence and tools to help your team take
          action on your app portfolio"
    :img        "http://cdn2.hubspot.net/hubfs/511335/website/appboard/magnifying-appboard.png"
-   :cta        registration-url})
+   :cta        (str www-url "/pricing/")})
 
 (def customers
   {:header "Our customer portfolio speaks for itself"
@@ -134,6 +130,8 @@
     :link (str www-url "/appbuilder/")}
    {:text "AppBoard"
     :link (str www-url "/appboard/")}
+   {:text "Pricing"
+    :link (str www-url "/pricing/")}
    {:text "Blog"
     :link "http://blog.exiconglobal.com/"}
    {:text "Resources"
@@ -173,7 +171,7 @@
     [:body {:onresize "closeMenu()"}
 
      [:ul#mobile-nav.navigation
-      [:li [:a {:href registration-url} "Sign Up"]]
+      [:li [:a {:href (str www-url "/pricing/")} "Sign Up"]]
       [:li [:a {:href node-appboard-url} "Login"]]
       (for [item top-nav]
         [:li {:onclick "closeMenu()" :class "nav-item"}
@@ -187,7 +185,7 @@
          [:a {:href (:link item)}
           (:text item)])]
       [:div.item
-       [:a.top-nav-button {:href registration-url} "Sign Up"]
+       [:a.top-nav-button {:href (str www-url "/pricing/")} "Sign Up"]
        [:a {:href node-appboard-url} "Login"]]]
 
      [:input.mobile-nav {:type "checkbox" :id "nav-trigger" :class "nav-trigger"}]
